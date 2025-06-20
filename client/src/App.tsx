@@ -1,5 +1,7 @@
+import MainPage from "./pages/MainPage";
+
 function App() {
-  return <div className="bg-green-400">Horizons Express</div>;
+  return <MainPage />;
 }
 
 export default App;
