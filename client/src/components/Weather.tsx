@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../utils/api";
 
 export default function Weather() {
   const [city, setCity] = useState("");
@@ -8,7 +9,7 @@ export default function Weather() {
     if (!city) return;
 
     try {
-      const response = await fetch(`http://localhost:4000/?city=${city}`);
+      const response = await fetch(`${API_URL}/?city=${city}`);
       const data = await response.json();
       setCityData(data);
       console.log(data);
