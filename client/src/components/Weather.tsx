@@ -19,6 +19,11 @@ export default function Weather() {
     ? formatTime(new Date(cityData?.sys.sunset * 1000))
     : null;
 
+  // to convert from meters per second into km/h
+  const windSpeed = cityData?.wind?.speed
+    ? Math.round(cityData.wind.speed * 3.6)
+    : null;
+
   const fetchWeather = async (city: string) => {
     if (!city) return;
 
@@ -110,7 +115,10 @@ export default function Weather() {
               <i className="wi wi-horizon text-3xl text-rose-500"></i>
               <p>{sunset}</p>
             </div>
-            {/* <p>Wind speed : {cityData.wind.speed}</p> */}
+            <div className="flex items-center gap-5">
+              <i className="wi wi-strong-wind text-3xl"></i>
+              <p>Wind : {windSpeed} km/h</p>
+            </div>
           </div>
         </div>
       ) : null}
