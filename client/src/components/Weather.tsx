@@ -82,10 +82,16 @@ export default function Weather() {
 
           <div className="border-t border-gray-200 my-4"></div>
 
-          <div className="space-y-1 text-sm">
-            <p>Sunrise : {sunrise}</p>
-            <p>Sunset : {sunset}</p>
-            <p>Wind speed : {cityData.wind.speed}</p>
+          <div className="space-y-5 text-sm">
+            <div className="flex items-center gap-5">
+              <i className="wi wi-horizon-alt text-3xl text-cyan-500"></i>
+              <p>{sunrise}</p>
+            </div>
+            <div className="flex items-center gap-5">
+              <i className="wi wi-horizon text-3xl text-cyan-500"></i>
+              <p>{sunset}</p>
+            </div>
+            {/* <p>Wind speed : {cityData.wind.speed}</p> */}
           </div>
         </div>
       ) : null}
