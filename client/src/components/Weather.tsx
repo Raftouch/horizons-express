@@ -3,7 +3,7 @@ import { API_URL } from "../utils/api";
 import type { Weather } from "../models/weather";
 
 export default function Weather() {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState<string>("");
   const [cityData, setCityData] = useState<Weather | null>(null);
 
   const fetchWeather = async (city: string) => {
