@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { API_URL } from "../utils/api";
 import type { Weather } from "../models/weather";
-import { iconMapping } from "../utils/icon-mapping";
+import { iconMapping } from "../utils/mapping";
 import { formatTime } from "../utils/format";
 
 export default function Weather() {
@@ -63,7 +63,7 @@ export default function Weather() {
             <h1 className="text-2xl font-bold">
               {cityData.name}, {cityData.sys.country}
             </h1>
-            <i className={`wi ${iconClass} text-6xl my-4 text-teal-500`}></i>
+            <i className={`wi ${iconClass} text-6xl my-4`}></i>
             <div className="flex items-center gap-1">
               <p className="text-3xl font-semibold mb-1">
                 {Math.round(cityData.main.temp)}
@@ -103,17 +103,21 @@ export default function Weather() {
 
           <div className="space-y-5 text-sm">
             <div className="flex items-center gap-5">
-              <i className="wi wi-horizon-alt text-3xl text-cyan-500"></i>
+              <i className="wi wi-horizon-alt text-3xl text-rose-500"></i>
               <p>{sunrise}</p>
             </div>
             <div className="flex items-center gap-5">
-              <i className="wi wi-horizon text-3xl text-cyan-500"></i>
+              <i className="wi wi-horizon text-3xl text-rose-500"></i>
               <p>{sunset}</p>
             </div>
             {/* <p>Wind speed : {cityData.wind.speed}</p> */}
           </div>
         </div>
       ) : null}
+
+      <button className="mt-10 border border-slate-400 px-2 py-1 rounded-full cursor-pointer">
+        Add to my list
+      </button>
     </div>
   );
 }
