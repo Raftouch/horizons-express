@@ -58,26 +58,45 @@ export default function Weather() {
         </button>
       </div>
       {cityData ? (
-        <div>
-          <h1 className="text-2xl font-bold mb-2">
-            {cityData.name}, {cityData.sys.country}
-          </h1>
-          <i className={`wi ${iconClass} text-6xl my-4 text-teal-500`}></i>
-          <p className="text-3xl font-semibold mb-1">
-            {Math.round(cityData.main.temp)}°C
-          </p>
+        <div className="flex flex-col">
+          <div className="">
+            <h1 className="text-2xl font-bold">
+              {cityData.name}, {cityData.sys.country}
+            </h1>
+            <i className={`wi ${iconClass} text-6xl my-4 text-teal-500`}></i>
+            <div className="flex items-center gap-1">
+              <p className="text-3xl font-semibold mb-1">
+                {Math.round(cityData.main.temp)}
+              </p>
+              <i className="wi wi-celsius text-4xl"></i>
+            </div>
 
-          <p className="italic text-gray-600 mb-4">
-            {cityData.weather[0].description}
-          </p>
+            <p className="italic text-gray-600">
+              {cityData.weather[0].description}
+            </p>
+          </div>
 
           <div className="border-t border-gray-200 my-4"></div>
 
-          <div className="space-y-1 text-sm">
-            <p>Feels like : {Math.round(cityData.main.feels_like)}°C</p>
-            <p>Humidity : {cityData.main.humidity}%</p>
-            <p>Max : {Math.round(cityData.main.temp_max)}°C</p>
-            <p>Min : {Math.round(cityData.main.temp_min)}°C</p>
+          <div className="flex gap-5 items-center">
+            <div className="">
+              <i className="wi wi-thermometer text-4xl"></i>
+            </div>
+            <div className="space-y-1 text-sm">
+              <div className="flex items-center gap-1">
+                <p>Feels like : {Math.round(cityData.main.feels_like)}</p>
+                <i className="wi wi-celsius text-xl text-emerald-500"></i>
+              </div>
+              <div className="flex items-center gap-1">
+                <p>Max : {Math.round(cityData.main.temp_max)}</p>
+                <i className="wi wi-celsius text-xl text-emerald-500"></i>
+              </div>
+              <div className="flex items-center gap-1">
+                <p>Min : {Math.round(cityData.main.temp_min)}</p>
+                <i className="wi wi-celsius text-xl text-emerald-500"></i>
+              </div>
+              <p>Humidity : {cityData.main.humidity}%</p>
+            </div>
           </div>
 
           <div className="border-t border-gray-200 my-4"></div>
