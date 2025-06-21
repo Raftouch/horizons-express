@@ -10,6 +10,17 @@ export default function Weather() {
   const iconCode = cityData?.weather[0].icon;
   const iconClass = iconCode ? iconMapping[iconCode] : "";
 
+  const formatTime = (date: Date): string =>
+    date.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+
+  const sunrise = cityData?.sys?.sunrise
+    ? formatTime(new Date(cityData?.sys.sunrise * 1000))
+    : null;
+
+  const sunset = cityData?.sys?.sunset
+    ? formatTime(new Date(cityData?.sys.sunset * 1000))
+    : null;
+
   const fetchWeather = async (city: string) => {
     if (!city) return;
 
@@ -58,8 +69,8 @@ export default function Weather() {
           <p>Min : {Math.round(cityData.main.temp_min)}</p>
 
           <p>Country : {cityData.sys.country}</p>
-          <p>Sunrise : {cityData.sys.sunrise}</p>
-          <p>Sunset : {cityData.sys.sunset}</p>
+          <p>Sunrise : {sunrise}</p>
+          <p>Sunset : {sunset}</p>
 
           <p>Wind speed : {cityData.wind.speed}</p>
         </div>
