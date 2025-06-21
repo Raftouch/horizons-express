@@ -3,6 +3,7 @@ import { API_URL } from "../utils/api";
 import type { Weather } from "../models/weather";
 import { iconMapping } from "../utils/mapping";
 import { formatTime } from "../utils/format";
+import { FaSearch } from "react-icons/fa";
 
 export default function Weather() {
   const [city, setCity] = useState<string>("");
@@ -53,13 +54,13 @@ export default function Weather() {
           value={city}
           placeholder="type city name here"
           onChange={handleChange}
-          className="border border-slate-400 px-2 py-1 rounded-l-full"
+          className="border border-slate-400 px-2 py-1 rounded-full"
         />
         <button
-          className="border border-slate-400 cursor-pointer px-2 py-1 rounded-r-full hover:bg-slate-200"
+          className="border border-slate-400 cursor-pointer px-2 py-1 rounded-full hover:bg-slate-200"
           onClick={handleSearch}
         >
-          Search
+          <FaSearch />
         </button>
       </div>
       {cityData ? (
