@@ -47,10 +47,21 @@ export default function Weather() {
       </button>
       {cityData ? (
         <div>
-          <h1>{cityData.name}</h1>
-          <p>{Math.round(cityData.main.temp)}</p>
-          <p>{cityData.weather[0].description}</p>
+          <h1>City name : {cityData.name}</h1>
+          <p>temperature : {Math.round(cityData.main.temp)}</p>
           <i className={`wi ${iconClass}`}></i>
+
+          <p>Description : {cityData.weather[0].description}</p>
+          <p>Feels like : {Math.round(cityData.main.feels_like)}</p>
+          <p>Humidity : {cityData.main.humidity}</p>
+          <p>Max : {Math.round(cityData.main.temp_max)}</p>
+          <p>Min : {Math.round(cityData.main.temp_min)}</p>
+
+          <p>Country : {cityData.sys.country}</p>
+          <p>Sunrise : {cityData.sys.sunrise}</p>
+          <p>Sunset : {cityData.sys.sunset}</p>
+
+          <p>Wind speed : {cityData.wind.speed}</p>
         </div>
       ) : null}
     </>
