@@ -69,13 +69,9 @@ export default function Weather() {
               {cityData.name}, {cityData.sys.country}
             </h1>
             <i className={`wi ${iconClass} text-6xl my-4`}></i>
-            <div className="flex items-center gap-1">
-              <p className="text-3xl font-semibold mb-1">
-                {Math.round(cityData.main.temp)}
-              </p>
-              <i className="wi wi-celsius text-4xl"></i>
-            </div>
-
+            <p className="text-3xl font-semibold mb-1">
+              {Math.round(cityData.main.temp)}°
+            </p>
             <p className="italic text-gray-600">
               {cityData.weather[0].description}
             </p>
@@ -88,18 +84,9 @@ export default function Weather() {
               <i className="wi wi-thermometer text-4xl"></i>
             </div>
             <div className="space-y-1 text-sm">
-              <div className="flex items-center gap-1">
-                <p>Feels like : {Math.round(cityData.main.feels_like)}</p>
-                <i className="wi wi-celsius text-xl text-emerald-500"></i>
-              </div>
-              <div className="flex items-center gap-1">
-                <p>Max : {Math.round(cityData.main.temp_max)}</p>
-                <i className="wi wi-celsius text-xl text-emerald-500"></i>
-              </div>
-              <div className="flex items-center gap-1">
-                <p>Min : {Math.round(cityData.main.temp_min)}</p>
-                <i className="wi wi-celsius text-xl text-emerald-500"></i>
-              </div>
+              <p>Feels like : {Math.round(cityData.main.feels_like)}°</p>
+              <p>Max : {Math.round(cityData.main.temp_max)}°</p>
+              <p>Min : {Math.round(cityData.main.temp_min)}°</p>
               <p>Humidity : {cityData.main.humidity}%</p>
             </div>
           </div>
