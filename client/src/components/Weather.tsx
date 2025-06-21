@@ -2,6 +2,7 @@ import { useState } from "react";
 import { API_URL } from "../utils/api";
 import type { Weather } from "../models/weather";
 import { iconMapping } from "../utils/icon-mapping";
+import { formatTime } from "../utils/format";
 
 export default function Weather() {
   const [city, setCity] = useState<string>("");
@@ -9,9 +10,6 @@ export default function Weather() {
 
   const iconCode = cityData?.weather[0].icon;
   const iconClass = iconCode ? iconMapping[iconCode] : "";
-
-  const formatTime = (date: Date): string =>
-    date.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
 
   const sunrise = cityData?.sys?.sunrise
     ? formatTime(new Date(cityData?.sys.sunrise * 1000))
