@@ -41,38 +41,54 @@ export default function Weather() {
   };
 
   return (
-    <>
-      <input
-        type="text"
-        value={city}
-        placeholder="type city name here"
-        onChange={handleChange}
-      />
-      <button
-        className="border border-black cursor-pointer"
-        onClick={handleSearch}
-      >
-        Search
-      </button>
+    <div className="font-mono">
+      <div className="flex gap-2 my-5">
+        <input
+          type="text"
+          value={city}
+          placeholder="type city name here"
+          onChange={handleChange}
+          className="border border-slate-400 px-2 py-1 rounded-l-full"
+        />
+        <button
+          className="border border-slate-400 cursor-pointer px-2 py-1 rounded-r-full hover:bg-slate-200"
+          onClick={handleSearch}
+        >
+          Search
+        </button>
+      </div>
       {cityData ? (
         <div>
-          <h1>City name : {cityData.name}</h1>
-          <p>temperature : {Math.round(cityData.main.temp)}</p>
-          <i className={`wi ${iconClass}`}></i>
+          <h1 className="text-2xl font-bold mb-2">
+            {cityData.name}, {cityData.sys.country}
+          </h1>
+          <i className={`wi ${iconClass} text-6xl my-4 text-teal-500`}></i>
+          <p className="text-3xl font-semibold mb-1">
+            {Math.round(cityData.main.temp)}°C
+          </p>
 
-          <p>Description : {cityData.weather[0].description}</p>
-          <p>Feels like : {Math.round(cityData.main.feels_like)}</p>
-          <p>Humidity : {cityData.main.humidity}</p>
-          <p>Max : {Math.round(cityData.main.temp_max)}</p>
-          <p>Min : {Math.round(cityData.main.temp_min)}</p>
+          <p className="italic text-gray-600 mb-4">
+            {cityData.weather[0].description}
+          </p>
 
-          <p>Country : {cityData.sys.country}</p>
-          <p>Sunrise : {sunrise}</p>
-          <p>Sunset : {sunset}</p>
+          <div className="border-t border-gray-200 my-4"></div>
 
-          <p>Wind speed : {cityData.wind.speed}</p>
+          <div className="space-y-1 text-sm">
+            <p>Feels like : {Math.round(cityData.main.feels_like)}°C</p>
+            <p>Humidity : {cityData.main.humidity}%</p>
+            <p>Max : {Math.round(cityData.main.temp_max)}°C</p>
+            <p>Min : {Math.round(cityData.main.temp_min)}°C</p>
+          </div>
+
+          <div className="border-t border-gray-200 my-4"></div>
+
+          <div className="space-y-1 text-sm">
+            <p>Sunrise : {sunrise}</p>
+            <p>Sunset : {sunset}</p>
+            <p>Wind speed : {cityData.wind.speed}</p>
+          </div>
         </div>
       ) : null}
-    </>
+    </div>
   );
 }
