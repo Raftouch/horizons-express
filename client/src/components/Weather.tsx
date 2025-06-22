@@ -8,6 +8,7 @@ import { FaSearch } from "react-icons/fa";
 export default function Weather() {
   const [city, setCity] = useState<string>("");
   const [cityData, setCityData] = useState<Weather | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const iconCode = cityData?.weather[0].icon;
   const iconClass = iconCode ? iconMapping[iconCode] : "";
@@ -29,11 +30,21 @@ export default function Weather() {
     if (!city) return;
 
     try {
+      setError(null);
       const response = await fetch(`${API_URL}/?city=${city}`);
+      console.log("res : ", response);
       const data = await response.json();
-      console.log(data);
-      setCityData(data);
+      console.log("data : ", data);
+
+      if (data.cod === "404") {
+        setCityData(null);
+        setError(data.message);
+      } else {
+        setCityData(data);
+      }
     } catch (error) {
+      setCityData(null);
+      setError("An error occured while fetching data");
       console.error("Error fetching weather", error);
     }
   };
@@ -63,6 +74,7 @@ export default function Weather() {
           <FaSearch />
         </button>
       </div>
+      {error ? <div className="text-red-500">{error}</div> : null}
       {cityData ? (
         <div className="flex flex-col">
           <div className="">
