@@ -39,3 +39,9 @@ plugins: [
 ```bash
 @import "tailwindcss";
 ```
+
+#### Global state
+
+```bash
+react-redux & redux toolkit
+```
