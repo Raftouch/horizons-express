@@ -21,5 +21,6 @@ export interface Weather {
     sunrise: number;
     sunset: number;
   };
+  id: number;
   name: string;
 }
