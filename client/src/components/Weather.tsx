@@ -4,11 +4,17 @@ import type { Weather } from "../models/weather";
 import { iconMapping } from "../utils/mapping";
 import { formatTime } from "../utils/format";
 import { FaSearch } from "react-icons/fa";
+import Favorite from "./Favorite";
+import { useDispatch } from "react-redux";
+import type { AddDispatch } from "../store/store";
+import { addWeather } from "../store/weather-slice";
 
 export default function Weather() {
   const [city, setCity] = useState<string>("");
   const [cityData, setCityData] = useState<Weather | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const dispatch = useDispatch<AddDispatch>();
 
   const iconCode = cityData?.weather[0].icon;
   const iconClass = iconCode ? iconMapping[iconCode] : "";
@@ -57,6 +63,10 @@ export default function Weather() {
     fetchWeather(city);
   };
 
+  const handleClick = () => {
+    if (cityData) dispatch(addWeather(cityData));
+  };
+
   return (
     <div className="font-mono">
       <div className="flex gap-2 my-5">
@@ -74,7 +84,9 @@ export default function Weather() {
           <FaSearch />
         </button>
       </div>
+
       {error ? <div className="text-red-500">{error}</div> : null}
+
       {cityData ? (
         <div className="flex flex-col">
           <div className="">
@@ -123,9 +135,15 @@ export default function Weather() {
         </div>
       ) : null}
 
-      <button className="mt-10 border border-slate-400 px-2 py-1 rounded-full cursor-pointer">
+      <button
+        onClick={handleClick}
+        className={`mt-10 border border-slate-400 px-2 py-1 rounded-full cursor-pointer ${
+          !cityData ? "opacity-50 cursos-not-allowed" : ""
+        }`}
+      >
         Add to my list
       </button>
+      <Favorite />
     </div>
   );
 }
