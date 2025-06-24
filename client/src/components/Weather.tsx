@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { API_URL } from "../utils/api";
 import type { Weather } from "../models/weather";
-import { iconMapping } from "../utils/mapping";
-import { formatTime } from "../utils/format";
 import { FaSearch } from "react-icons/fa";
 import Favorite from "./Favorite";
 import { useDispatch } from "react-redux";
 import type { AddDispatch } from "../store/store";
 import { addWeather } from "../store/weather-slice";
+import WeatherCard from "./Weathercard";
 
 export default function Weather() {
   const [city, setCity] = useState<string>("");
@@ -15,22 +14,6 @@ export default function Weather() {
   const [error, setError] = useState<string | null>(null);
 
   const dispatch = useDispatch<AddDispatch>();
-
-  const iconCode = cityData?.weather[0].icon;
-  const iconClass = iconCode ? iconMapping[iconCode] : "";
-
-  const sunrise = cityData?.sys?.sunrise
-    ? formatTime(new Date(cityData?.sys.sunrise * 1000))
-    : null;
-
-  const sunset = cityData?.sys?.sunset
-    ? formatTime(new Date(cityData?.sys.sunset * 1000))
-    : null;
-
-  // to convert from meters per second into km/h
-  const windSpeed = cityData?.wind?.speed
-    ? Math.round(cityData.wind.speed * 3.6)
-    : null;
 
   const fetchWeather = async (city: string) => {
     if (!city) return;
@@ -87,53 +70,7 @@ export default function Weather() {
 
       {error ? <div className="text-red-500">{error}</div> : null}
 
-      {cityData ? (
-        <div className="flex flex-col">
-          <div className="">
-            <h1 className="text-2xl font-bold">
-              {cityData.name}, {cityData.sys.country}
-            </h1>
-            <i className={`wi ${iconClass} text-6xl my-4`}></i>
-            <p className="text-3xl font-semibold mb-1">
-              {Math.round(cityData.main.temp)}°
-            </p>
-            <p className="italic text-gray-600">
-              {cityData.weather[0].description}
-            </p>
-          </div>
-
-          <div className="border-t border-gray-200 my-4"></div>
-
-          <div className="flex gap-5 items-center">
-            <div className="">
-              <i className="wi wi-thermometer text-4xl"></i>
-            </div>
-            <div className="space-y-1 text-sm">
-              <p>Feels like : {Math.round(cityData.main.feels_like)}°</p>
-              <p>Max : {Math.round(cityData.main.temp_max)}°</p>
-              <p>Min : {Math.round(cityData.main.temp_min)}°</p>
-              <p>Humidity : {cityData.main.humidity}%</p>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-200 my-4"></div>
-
-          <div className="space-y-5 text-sm">
-            <div className="flex items-center gap-5">
-              <i className="wi wi-horizon-alt text-3xl text-rose-500"></i>
-              <p>{sunrise}</p>
-            </div>
-            <div className="flex items-center gap-5">
-              <i className="wi wi-horizon text-3xl text-rose-500"></i>
-              <p>{sunset}</p>
-            </div>
-            <div className="flex items-center gap-5">
-              <i className="wi wi-strong-wind text-3xl"></i>
-              <p>Wind : {windSpeed} km/h</p>
-            </div>
-          </div>
-        </div>
-      ) : null}
+      {cityData ? <WeatherCard cityWeather={cityData} /> : null}
 
       <button
         onClick={handleClick}
