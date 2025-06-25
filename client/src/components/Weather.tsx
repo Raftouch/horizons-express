@@ -52,16 +52,16 @@ export default function Weather() {
 
   return (
     <div className="font-mono">
-      <div className="flex gap-2 my-5">
+      <div className="flex gap-5 my-5 text-white pb-5 w-[364px]">
         <input
           type="text"
           value={city}
           placeholder="type city name here"
           onChange={handleChange}
-          className="border border-slate-400 px-2 py-1 rounded-full"
+          className="flex-1 border border-slate-400 px-2 py-1 rounded-full"
         />
         <button
-          className="border border-slate-400 cursor-pointer px-2 py-1 rounded-full hover:bg-slate-200"
+          className="border border-slate-400 cursor-pointer px-2 py-1 rounded-full hover:bg-slate-800"
           onClick={handleSearch}
         >
           <FaSearch />
@@ -74,7 +74,7 @@ export default function Weather() {
 
       <button
         onClick={handleClick}
-        className={`mt-10 border border-slate-400 px-2 py-1 rounded-full cursor-pointer ${
+        className={`text-white mt-10 border border-slate-400 px-2 py-1 rounded-full cursor-pointer hover:bg-slate-800 ${
           !cityData ? "opacity-50 cursos-not-allowed" : ""
         }`}
       >

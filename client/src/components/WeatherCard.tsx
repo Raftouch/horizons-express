@@ -24,8 +24,8 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
     : null;
 
   return (
-    <div className="flex flex-col">
-      <div className="">
+    <div className="flex flex-col w-[364px] py-10 bg-white rounded rounded-xl items-center">
+      <div className="text-center">
         <h1 className="text-2xl font-bold">
           {cityWeather.name}, {cityWeather.sys.country}
         </h1>
@@ -54,18 +54,18 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
 
       <div className="border-t border-gray-200 my-4"></div>
 
-      <div className="space-y-5 text-sm">
+      <div className="space-y-1 text-sm">
         <div className="flex items-center gap-5">
           <i className="wi wi-horizon-alt text-3xl text-rose-500"></i>
-          <p>{sunrise}</p>
+          <p>Sunrise: {sunrise}</p>
         </div>
         <div className="flex items-center gap-5">
           <i className="wi wi-horizon text-3xl text-rose-500"></i>
-          <p>{sunset}</p>
+          <p>Sunset: {sunset}</p>
         </div>
         <div className="flex items-center gap-5">
           <i className="wi wi-strong-wind text-3xl"></i>
-          <p>Wind : {windSpeed} km/h</p>
+          <p>Wind: {windSpeed} km/h</p>
         </div>
       </div>
     </div>
