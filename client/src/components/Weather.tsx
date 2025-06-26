@@ -9,11 +9,13 @@ export default function Weather() {
   const [city, setCity] = useState<string>("");
   const [cityData, setCityData] = useState<Weather | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchWeather = async (city: string) => {
     if (!city) return;
 
     try {
+      setIsLoading(true);
       setError(null);
       const response = await fetch(`${API_URL}/?city=${city}`);
       console.log("res : ", response);
@@ -30,6 +32,8 @@ export default function Weather() {
       setCityData(null);
       setError("An error occured while fetching data");
       console.error("Error fetching weather", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -40,6 +44,8 @@ export default function Weather() {
   const handleSearch = () => {
     fetchWeather(city);
   };
+
+  if (isLoading) return <div className="">Loading</div>;
 
   return (
     <>
