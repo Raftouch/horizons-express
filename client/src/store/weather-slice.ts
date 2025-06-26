@@ -17,16 +17,21 @@ const weatherSlice = createSlice({
       const newCity = action.payload;
 
       const alreadyExists = state.weather.some(
-        (city) => city.name.toLowerCase() === newCity.name.toLowerCase()
+        (city) => city.id === newCity.id
       );
 
       if (!alreadyExists) {
         state.weather.push(newCity);
       }
     },
+    removeWeather: (state, action: PayloadAction<Weather>) => {
+      state.weather = state.weather.filter(
+        (city) => city.id !== action.payload.id
+      );
+    },
   },
 });
 
-export const { addWeather } = weatherSlice.actions;
+export const { addWeather, removeWeather } = weatherSlice.actions;
 
 export default weatherSlice.reducer;
