@@ -42,7 +42,7 @@ export default function Weather() {
   };
 
   return (
-    <div className="font-mono">
+    <>
       <div className="flex flex-col items-center">
         <div className="flex gap-5 my-5 text-white pb-5 w-[364px]">
           <input
@@ -68,6 +68,6 @@ export default function Weather() {
       </div>
 
       <Favorite />
-    </div>
+    </>
   );
 }
