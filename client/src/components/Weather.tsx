@@ -63,11 +63,7 @@ export default function Weather() {
         {error ? <div className="text-red-500">{error}</div> : null}
 
         {cityData ? (
-          <WeatherCard
-            key={cityData.id}
-            cityWeather={cityData}
-            showAddButton={true}
-          />
+          <WeatherCard key={cityData.id} cityWeather={cityData} />
         ) : null}
       </div>
 

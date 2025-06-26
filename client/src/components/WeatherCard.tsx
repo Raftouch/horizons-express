@@ -1,19 +1,15 @@
 import type { Weather } from "../models/weather";
 import { iconMapping } from "../utils/mapping";
 import { formatTime } from "../utils/format";
-import { useDispatch } from "react-redux";
-import type { AddDispatch } from "../store/store";
-import { addWeather } from "../store/weather-slice";
+import { useDispatch, useSelector } from "react-redux";
+import type { AddDispatch, RootState } from "../store/store";
+import { addWeather, removeWeather } from "../store/weather-slice";
 
 interface CityWeatherProps {
   cityWeather: Weather;
-  showAddButton: Boolean;
 }
 
-export default function WeatherCard({
-  cityWeather,
-  showAddButton = false,
-}: CityWeatherProps) {
+export default function WeatherCard({ cityWeather }: CityWeatherProps) {
   const iconCode = cityWeather?.weather[0].icon;
   const iconClass = iconCode ? iconMapping[iconCode] : "";
 
@@ -32,9 +28,17 @@ export default function WeatherCard({
 
   const dispatch = useDispatch<AddDispatch>();
 
-  const handleClick = () => {
+  const handleAdd = () => {
     if (cityWeather) dispatch(addWeather(cityWeather));
   };
+
+  const handleRemove = () => {
+    dispatch(removeWeather(cityWeather));
+  };
+
+  const isFavorite = useSelector((state: RootState) =>
+    state.cities.weather.some((city) => city.id === cityWeather.id)
+  );
 
   return (
     <div className="flex flex-col w-[364px] p-8 bg-white rounded rounded-xl items-center">
@@ -81,16 +85,25 @@ export default function WeatherCard({
           <p>Wind: {windSpeed} km/h</p>
         </div>
       </div>
-      {showAddButton ? (
+      {!isFavorite ? (
         <button
-          onClick={handleClick}
+          onClick={handleAdd}
           className={`mt-10 text-white w-full px-2 py-1 rounded-full cursor-pointer bg-green-600 hover:bg-green-700 ${
             !cityWeather ? "opacity-50 cursos-not-allowed" : ""
           }`}
         >
           Add to my list
         </button>
-      ) : null}
+      ) : (
+        <button
+          onClick={handleRemove}
+          className={`mt-10 text-white w-full px-2 py-1 rounded-full cursor-pointer bg-red-600 hover:bg-red-700 ${
+            !cityWeather ? "opacity-50 cursos-not-allowed" : ""
+          }`}
+        >
+          Remove from list
+        </button>
+      )}
     </div>
   );
 }
