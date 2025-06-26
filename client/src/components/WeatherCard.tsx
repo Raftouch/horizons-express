@@ -55,31 +55,28 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
         </p>
       </div>
 
-      <div className="flex gap-5 items-center border-t border-slate-400 w-full py-4">
-        <div className="">
-          <i className="wi wi-thermometer text-4xl text-sky-600"></i>
-        </div>
+      <div className="flex gap-5 items-center justify-center border-t border-slate-400 w-full py-4">
+        <i className="wi wi-thermometer text-4xl text-sky-600"></i>
         <div className="space-y-1 text-sm">
-          <p>Feels like : {Math.round(cityWeather.main.feels_like)}°</p>
-          <p>Max : {Math.round(cityWeather.main.temp_max)}°</p>
-          <p>Min : {Math.round(cityWeather.main.temp_min)}°</p>
-          <p>Humidity : {cityWeather.main.humidity}%</p>
+          <p>Feels like: {Math.round(cityWeather.main.feels_like)}°</p>
+          <p>Max: {Math.round(cityWeather.main.temp_max)}°</p>
+          <p>Min: {Math.round(cityWeather.main.temp_min)}°</p>
+          <p>Humidity: {cityWeather.main.humidity}%</p>
         </div>
       </div>
 
-      <div className="space-y-0.5 text-sm border-t border-slate-400 w-full pt-4">
-        <div className="flex items-center gap-5">
+      <div className="flex justify-center items-center gap-5 text-sm border-t border-slate-400 w-full pt-4">
+        <div className="flex flex-col">
           <i className="wi wi-horizon-alt text-3xl text-orange-500"></i>
-          <p>Sunrise: {sunrise}</p>
-        </div>
-        <div className="flex items-center gap-5">
           <i className="wi wi-horizon text-3xl text-red-500"></i>
-          <p>Sunset: {sunset}</p>
-        </div>
-        <div className="flex items-center gap-5">
           <i className="wi wi-strong-wind text-3xl text-sky-800"></i>
+        </div>
+        <div className="flex flex-col gap-2">
+          <p>Sunrise: {sunrise}</p>
+          <p>Sunset: {sunset}</p>
           <p>Wind: {windSpeed} km/h</p>
         </div>
+        <div className="flex items-center gap-5"></div>
       </div>
       {!isFavorite ? (
         <button
