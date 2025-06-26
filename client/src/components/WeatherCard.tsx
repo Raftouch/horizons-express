@@ -14,15 +14,11 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
   const iconClass = iconCode ? iconMapping[iconCode] : "";
 
   const sunrise = cityWeather?.sys?.sunrise
-    ? formatTime(
-        new Date((cityWeather.sys.sunrise + cityWeather.timezone) * 1000)
-      )
+    ? formatTime(cityWeather.sys.sunrise, cityWeather.timezone)
     : null;
 
   const sunset = cityWeather?.sys?.sunset
-    ? formatTime(
-        new Date((cityWeather.sys.sunset + cityWeather.timezone) * 1000)
-      )
+    ? formatTime(cityWeather.sys.sunset, cityWeather.timezone)
     : null;
 
   // to convert from meters per second into km/h
