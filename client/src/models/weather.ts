@@ -21,6 +21,7 @@ export interface Weather {
     sunrise: number;
     sunset: number;
   };
+  timezone: number;
   id: number;
   name: string;
 }
