@@ -24,7 +24,7 @@ export default function Weather() {
     dispatch(fetchWeather(city));
   };
 
-  if (isLoading) return <div className="">Loading</div>;
+  if (isLoading) return <div className="text-center">Loading...</div>;
 
   return (
     <>
