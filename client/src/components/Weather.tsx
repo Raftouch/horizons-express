@@ -1,48 +1,56 @@
 import { useState } from "react";
-import { API_URL } from "../utils/api";
+// import { API_URL } from "../utils/api";
 import type { Weather } from "../models/weather";
 import { FaSearch } from "react-icons/fa";
 import Favorite from "./Favorite";
 import WeatherCard from "./WeatherCard";
+import { useDispatch, useSelector } from "react-redux";
+import type { AddDispatch, RootState } from "../store/store";
+import { fetchWeather } from "../store/weather-slice";
 
 export default function Weather() {
   const [city, setCity] = useState<string>("");
-  const [cityData, setCityData] = useState<Weather | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const [cityData, setCityData] = useState<Weather | null>(null);
+  // const [error, setError] = useState<string | null>(null);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const fetchWeather = async (city: string) => {
-    if (!city) return;
+  const { selectedCityWeather, isLoading, error } = useSelector(
+    (state: RootState) => state.cities
+  );
+  const dispatch = useDispatch<AddDispatch>();
 
-    try {
-      setIsLoading(true);
-      setError(null);
-      const response = await fetch(`${API_URL}/?city=${city}`);
-      console.log("res : ", response);
-      const data = await response.json();
-      console.log("data : ", data);
+  // const fetchWeather = async (city: string) => {
+  //   if (!city) return;
 
-      if (data.cod === "404") {
-        setCityData(null);
-        setError(data.message);
-      } else {
-        setCityData(data);
-      }
-    } catch (error) {
-      setCityData(null);
-      setError("An error occured while fetching data");
-      console.error("Error fetching weather", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //   try {
+  //     setIsLoading(true);
+  //     setError(null);
+  //     const response = await fetch(`${API_URL}/?city=${city}`);
+  //     console.log("res : ", response);
+  //     const data = await response.json();
+  //     console.log("data : ", data);
+
+  //     if (data.cod === "404") {
+  //       setCityData(null);
+  //       setError(data.message);
+  //     } else {
+  //       setCityData(data);
+  //     }
+  //   } catch (error) {
+  //     setCityData(null);
+  //     setError("An error occured while fetching data");
+  //     console.error("Error fetching weather", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
   };
 
   const handleSearch = () => {
-    fetchWeather(city);
+    dispatch(fetchWeather(city));
   };
 
   if (isLoading) return <div className="">Loading</div>;
@@ -68,8 +76,11 @@ export default function Weather() {
 
         {error ? <div className="text-red-500">{error}</div> : null}
 
-        {cityData ? (
-          <WeatherCard key={cityData.id} cityWeather={cityData} />
+        {selectedCityWeather ? (
+          <WeatherCard
+            key={selectedCityWeather.id}
+            cityWeather={selectedCityWeather}
+          />
         ) : null}
       </div>
 
