@@ -41,7 +41,7 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
   );
 
   return (
-    <div className="flex flex-col w-[364px] p-8 bg-white rounded rounded-xl items-center">
+    <div className="flex flex-col w-[360px] p-8 bg-white rounded rounded-xl items-center">
       <div className="text-center pb-4">
         <h1 className="text-2xl font-bold">
           {cityWeather.name}, {cityWeather.sys.country}
