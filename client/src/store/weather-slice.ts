@@ -13,8 +13,10 @@ interface WeatherState {
   error: string | null;
 }
 
+const savedCities = localStorage.getItem("favoriteCities");
+
 const initialState: WeatherState = {
-  weather: [],
+  weather: savedCities ? JSON.parse(savedCities) : [],
   selectedCityWeather: null,
   isLoading: false,
   error: null,
