@@ -1,13 +1,48 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
 import type { Weather } from "../models/weather";
+import { API_URL } from "../utils/api";
 
 interface WeatherState {
   weather: Weather[];
+  selectedCityWeather: Weather | null;
+  isLoading: boolean;
+  error: string | null;
 }
 
+const savedCities = localStorage.getItem("favoriteCities");
+
 const initialState: WeatherState = {
-  weather: [],
+  weather: savedCities ? JSON.parse(savedCities) : [],
+  selectedCityWeather: null,
+  isLoading: false,
+  error: null,
 };
+
+// createAsyncThunk<ReturnType, ArgumentType, ThunkApiConfig>(
+export const fetchWeather = createAsyncThunk<
+  Weather,
+  string,
+  { rejectValue: string }
+>("weather/fetchWeather", async (city: string, thunkAPI) => {
+  if (!city) return;
+
+  try {
+    const response = await fetch(`${API_URL}/?city=${city}`);
+    const data = await response.json();
+
+    if (data.cod === "404") {
+      return thunkAPI.rejectWithValue(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue("An error occured while fetching data");
+  }
+});
 
 const weatherSlice = createSlice({
   name: "weather",
@@ -29,6 +64,24 @@ const weatherSlice = createSlice({
         (city) => city.id !== action.payload.id
       );
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchWeather.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchWeather.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.selectedCityWeather = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchWeather.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error =
+          action.payload || action.error.message || "Failed to fetch data";
+        state.selectedCityWeather = null;
+      });
   },
 });
 
