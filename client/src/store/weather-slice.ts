@@ -8,6 +8,7 @@ import { API_URL } from "../utils/api";
 
 interface WeatherState {
   weather: Weather[];
+  favorites: string[];
   selectedCityWeather: Weather | null;
   isLoading: boolean;
   error: string | null;
@@ -16,7 +17,8 @@ interface WeatherState {
 const savedCities = localStorage.getItem("favoriteCities");
 
 const initialState: WeatherState = {
-  weather: savedCities ? JSON.parse(savedCities) : [],
+  weather: [],
+  favorites: savedCities ? JSON.parse(savedCities) : [],
   selectedCityWeather: null,
   isLoading: false,
   error: null,
@@ -64,6 +66,18 @@ const weatherSlice = createSlice({
         (city) => city.id !== action.payload.id
       );
     },
+    addFavorite: (state, action: PayloadAction<string>) => {
+      const favCity = action.payload;
+
+      if (!state.favorites.includes(favCity)) {
+        state.favorites.push(favCity);
+      }
+    },
+    removeFavorite: (state, action: PayloadAction<string>) => {
+      state.favorites = state.favorites.filter(
+        (cityName) => cityName !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -85,6 +99,7 @@ const weatherSlice = createSlice({
   },
 });
 
-export const { addWeather, removeWeather } = weatherSlice.actions;
+export const { addWeather, removeWeather, addFavorite, removeFavorite } =
+  weatherSlice.actions;
 
 export default weatherSlice.reducer;

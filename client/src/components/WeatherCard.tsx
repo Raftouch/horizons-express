@@ -3,7 +3,12 @@ import { iconMapping } from "../utils/mapping";
 import { formatTime } from "../utils/format";
 import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
-import { addWeather, removeWeather } from "../store/weather-slice";
+import {
+  addFavorite,
+  // addWeather,
+  removeFavorite,
+  // removeWeather,
+} from "../store/weather-slice";
 
 interface CityWeatherProps {
   cityWeather: Weather;
@@ -28,16 +33,22 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
 
   const dispatch = useDispatch<AddDispatch>();
 
+  // const handleAdd = () => {
+  //   if (cityWeather) dispatch(addWeather(cityWeather));
+  // };
   const handleAdd = () => {
-    if (cityWeather) dispatch(addWeather(cityWeather));
+    dispatch(addFavorite(cityWeather.name));
   };
 
   const handleRemove = () => {
-    dispatch(removeWeather(cityWeather));
+    dispatch(removeFavorite(cityWeather.name));
   };
 
+  // const isFavorite = useSelector((state: RootState) =>
+  //   state.cities.weather.some((city) => city.id === cityWeather.id)
+  // );
   const isFavorite = useSelector((state: RootState) =>
-    state.cities.weather.some((city) => city.id === cityWeather.id)
+    state.cities.favorites.includes(cityWeather.name)
   );
 
   return (
