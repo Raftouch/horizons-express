@@ -4,7 +4,7 @@ import {
   type PayloadAction,
 } from "@reduxjs/toolkit";
 import type { Weather } from "../models/weather";
-import { API_URL } from "../utils/api";
+import { fetchWeatherByCity } from "../utils/api";
 
 interface WeatherState {
   weather: Weather[];
@@ -29,43 +29,13 @@ export const fetchWeatherForSelectedCity = createAsyncThunk<
   Weather,
   string,
   { rejectValue: string }
->("weather/fetchWeatherForSelectedCity", async (city: string, thunkAPI) => {
-  if (!city) return;
-
-  try {
-    const response = await fetch(`${API_URL}/?city=${city}`);
-    const data = await response.json();
-
-    if (data.cod === "404") {
-      return thunkAPI.rejectWithValue(data.message);
-    }
-
-    return data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue("An error occured while fetching data");
-  }
-});
+>("weather/fetchWeatherForSelectedCity", fetchWeatherByCity);
 
 export const fetchWeatherForFavorites = createAsyncThunk<
   Weather,
   string,
   { rejectValue: string }
->("weather/fetchWeatherForFavorites", async (city: string, thunkAPI) => {
-  if (!city) return;
-
-  try {
-    const response = await fetch(`${API_URL}/?city=${city}`);
-    const data = await response.json();
-
-    if (data.cod === "404") {
-      return thunkAPI.rejectWithValue(data.message);
-    }
-
-    return data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue("An error occured while fetching data");
-  }
-});
+>("weather/fetchWeatherForFavorites", fetchWeatherByCity);
 
 const weatherSlice = createSlice({
   name: "weather",
