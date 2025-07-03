@@ -69,10 +69,16 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
       <div className="flex gap-5 items-center justify-center border-t border-slate-400 w-full py-4">
         <i className="wi wi-thermometer text-4xl text-sky-600"></i>
         <div className="space-y-1 text-sm">
-          <p>Feels like: {Math.round(cityWeather.main.feels_like)}°</p>
-          <p>Max: {Math.round(cityWeather.main.temp_max)}°</p>
-          <p>Min: {Math.round(cityWeather.main.temp_min)}°</p>
-          <p>Humidity: {cityWeather.main.humidity}%</p>
+          <div className="flex gap-5">
+            <div>
+              <p>H:{Math.round(cityWeather.main.temp_max)}°</p>
+              <p>L:{Math.round(cityWeather.main.temp_min)}°</p>
+            </div>
+            <div>
+              <p>Feels like: {Math.round(cityWeather.main.feels_like)}°</p>
+              <p>Humidity: {cityWeather.main.humidity}%</p>
+            </div>
+          </div>
         </div>
       </div>
 
