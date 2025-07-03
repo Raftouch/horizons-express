@@ -2,7 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
 import WeatherCard from "./WeatherCard";
 import { useEffect } from "react";
-import { fetchWeather } from "../store/weather-slice";
+import {
+  clearSelectedCityWeather,
+  fetchWeatherForFavorites,
+} from "../store/weather-slice";
 
 export default function Favorite() {
   const allWeather = useSelector((state: RootState) => state.cities.weather);
@@ -15,10 +18,14 @@ export default function Favorite() {
   const dispatch = useDispatch<AddDispatch>();
 
   useEffect(() => {
+    dispatch(clearSelectedCityWeather());
     favorites.forEach((city) => {
-      dispatch(fetchWeather(city));
+      dispatch(fetchWeatherForFavorites(city));
     });
   }, [favorites, dispatch]);
+
+  console.log("favorites : ", favorites);
+  console.log("all weather : ", allWeather);
 
   return (
     <div className="mt-5">
