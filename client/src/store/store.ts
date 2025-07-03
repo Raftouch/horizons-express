@@ -9,7 +9,7 @@ const store = configureStore({
 
 store.subscribe(() => {
   const state = store.getState();
-  const favorites = state.cities.weather;
+  const favorites = state.cities.favorites;
   localStorage.setItem("favoriteCities", JSON.stringify(favorites));
 });
 

@@ -3,7 +3,12 @@ import { iconMapping } from "../utils/mapping";
 import { formatTime } from "../utils/format";
 import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
-import { addWeather, removeWeather } from "../store/weather-slice";
+import {
+  addFavorite,
+  // addWeather,
+  removeFavorite,
+  // removeWeather,
+} from "../store/weather-slice";
 
 interface CityWeatherProps {
   cityWeather: Weather;
@@ -28,16 +33,22 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
 
   const dispatch = useDispatch<AddDispatch>();
 
+  // const handleAdd = () => {
+  //   if (cityWeather) dispatch(addWeather(cityWeather));
+  // };
   const handleAdd = () => {
-    if (cityWeather) dispatch(addWeather(cityWeather));
+    dispatch(addFavorite(cityWeather.name));
   };
 
   const handleRemove = () => {
-    dispatch(removeWeather(cityWeather));
+    dispatch(removeFavorite(cityWeather.name));
   };
 
+  // const isFavorite = useSelector((state: RootState) =>
+  //   state.cities.weather.some((city) => city.id === cityWeather.id)
+  // );
   const isFavorite = useSelector((state: RootState) =>
-    state.cities.weather.some((city) => city.id === cityWeather.id)
+    state.cities.favorites.includes(cityWeather.name)
   );
 
   return (
@@ -58,10 +69,16 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
       <div className="flex gap-5 items-center justify-center border-t border-slate-400 w-full py-4">
         <i className="wi wi-thermometer text-4xl text-sky-600"></i>
         <div className="space-y-1 text-sm">
-          <p>Feels like: {Math.round(cityWeather.main.feels_like)}°</p>
-          <p>Max: {Math.round(cityWeather.main.temp_max)}°</p>
-          <p>Min: {Math.round(cityWeather.main.temp_min)}°</p>
-          <p>Humidity: {cityWeather.main.humidity}%</p>
+          <div className="flex gap-5">
+            <div>
+              <p>H:{Math.round(cityWeather.main.temp_max)}°</p>
+              <p>L:{Math.round(cityWeather.main.temp_min)}°</p>
+            </div>
+            <div>
+              <p>Feels like: {Math.round(cityWeather.main.feels_like)}°</p>
+              <p>Humidity: {cityWeather.main.humidity}%</p>
+            </div>
+          </div>
         </div>
       </div>
 

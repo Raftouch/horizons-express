@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import WeatherCard from "./WeatherCard";
 import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
-import { fetchWeather } from "../store/weather-slice";
+import { fetchWeatherForSelectedCity } from "../store/weather-slice";
 
 export default function Weather() {
   const [city, setCity] = useState<string>("");
@@ -20,7 +20,7 @@ export default function Weather() {
   };
 
   const handleSearch = () => {
-    dispatch(fetchWeather(city));
+    dispatch(fetchWeatherForSelectedCity(city));
   };
 
   if (isLoading) return <div className="text-center">Loading...</div>;
