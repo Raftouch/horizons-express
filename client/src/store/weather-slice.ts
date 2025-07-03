@@ -25,11 +25,32 @@ const initialState: WeatherState = {
 };
 
 // createAsyncThunk<ReturnType, ArgumentType, ThunkApiConfig>(
-export const fetchWeather = createAsyncThunk<
+export const fetchWeatherForSelectedCity = createAsyncThunk<
   Weather,
   string,
   { rejectValue: string }
->("weather/fetchWeather", async (city: string, thunkAPI) => {
+>("weather/fetchWeatherForSelectedCity", async (city: string, thunkAPI) => {
+  if (!city) return;
+
+  try {
+    const response = await fetch(`${API_URL}/?city=${city}`);
+    const data = await response.json();
+
+    if (data.cod === "404") {
+      return thunkAPI.rejectWithValue(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue("An error occured while fetching data");
+  }
+});
+
+export const fetchWeatherForFavorites = createAsyncThunk<
+  Weather,
+  string,
+  { rejectValue: string }
+>("weather/fetchWeatherForFavorites", async (city: string, thunkAPI) => {
   if (!city) return;
 
   try {
@@ -78,37 +99,45 @@ const weatherSlice = createSlice({
         (cityName) => cityName !== action.payload
       );
     },
+    clearSelectedCityWeather: (state) => {
+      state.selectedCityWeather = null;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchWeather.pending, (state) => {
+      .addCase(fetchWeatherForSelectedCity.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(fetchWeather.fulfilled, (state, action) => {
+      .addCase(fetchWeatherForSelectedCity.fulfilled, (state, action) => {
         state.isLoading = false;
         state.selectedCityWeather = action.payload;
         state.error = null;
-
-        const index = state.weather.findIndex(
-          (city) => city.id === action.payload.id
-        );
-        if (index >= 0) {
-          state.weather[index] = action.payload;
-        } else {
-          state.weather.push(action.payload);
-        }
       })
-      .addCase(fetchWeather.rejected, (state, action) => {
+      .addCase(fetchWeatherForSelectedCity.rejected, (state, action) => {
         state.isLoading = false;
         state.error =
           action.payload || action.error.message || "Failed to fetch data";
         state.selectedCityWeather = null;
+      })
+      .addCase(fetchWeatherForFavorites.fulfilled, (state, action) => {
+        const newCity = action.payload;
+        const index = state.weather.findIndex((city) => city.id === newCity.id);
+        if (index >= 0) {
+          state.weather[index] = newCity;
+        } else {
+          state.weather.push(newCity);
+        }
       });
   },
 });
 
-export const { addWeather, removeWeather, addFavorite, removeFavorite } =
-  weatherSlice.actions;
+export const {
+  addWeather,
+  removeWeather,
+  addFavorite,
+  removeFavorite,
+  clearSelectedCityWeather,
+} = weatherSlice.actions;
 
 export default weatherSlice.reducer;
