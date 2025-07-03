@@ -89,15 +89,6 @@ const weatherSlice = createSlice({
         state.isLoading = false;
         state.selectedCityWeather = action.payload;
         state.error = null;
-
-        const index = state.weather.findIndex(
-          (city) => city.id === action.payload.id
-        );
-        if (index >= 0) {
-          state.weather[index] = action.payload;
-        } else {
-          state.weather.push(action.payload);
-        }
       })
       .addCase(fetchWeather.rejected, (state, action) => {
         state.isLoading = false;
