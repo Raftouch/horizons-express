@@ -3,12 +3,7 @@ import { iconMapping } from "../utils/mapping";
 import { formatTime } from "../utils/format";
 import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
-import {
-  addFavorite,
-  // addWeather,
-  removeFavorite,
-  // removeWeather,
-} from "../store/weather-slice";
+import { addFavorite, removeFavorite } from "../store/weather-slice";
 
 interface CityWeatherProps {
   cityWeather: Weather;
@@ -33,9 +28,6 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
 
   const dispatch = useDispatch<AddDispatch>();
 
-  // const handleAdd = () => {
-  //   if (cityWeather) dispatch(addWeather(cityWeather));
-  // };
   const handleAdd = () => {
     dispatch(addFavorite(cityWeather.name));
   };
