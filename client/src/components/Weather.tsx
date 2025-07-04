@@ -31,7 +31,7 @@ export default function Weather() {
         <input
           type="text"
           value={city}
-          placeholder="type city name here"
+          placeholder="Search for a city"
           onChange={handleChange}
           className="flex-1 border border-slate-400 px-2 py-1 rounded-full"
         />
