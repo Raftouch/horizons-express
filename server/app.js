@@ -5,7 +5,11 @@ const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 4000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://horizons-express.netlify.app/"],
+  })
+);
 app.use("/", require("./routes/weather"));
 
 const start = async () => {
