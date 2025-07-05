@@ -24,9 +24,6 @@ export default function Favorite() {
     });
   }, [favorites, dispatch]);
 
-  console.log("favorites : ", favorites);
-  console.log("all weather : ", allWeather);
-
   return (
     <div className="">
       <h2 className="text-white text-center text-xl my-10">Favorite Cities</h2>
