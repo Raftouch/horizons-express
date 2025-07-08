@@ -26,7 +26,8 @@ export default function Weather() {
     dispatch(fetchWeatherForSelectedCity(city));
   };
 
-  if (isLoading) return <div className="text-center">Loading...</div>;
+  if (isLoading)
+    return <div className="text-center text-white">{t("actions.loading")}</div>;
 
   return (
     <div className="flex flex-col items-center">
