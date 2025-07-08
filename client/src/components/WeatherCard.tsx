@@ -4,6 +4,7 @@ import { formatTime } from "../utils/format";
 import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
 import { addFavorite, removeFavorite } from "../store/weather-slice";
+import { useTranslation } from "react-i18next";
 
 interface CityWeatherProps {
   cityWeather: Weather;
@@ -12,6 +13,12 @@ interface CityWeatherProps {
 export default function WeatherCard({ cityWeather }: CityWeatherProps) {
   const iconCode = cityWeather?.weather[0].icon;
   const iconClass = iconCode ? iconMapping[iconCode] : "";
+
+  const { t, i18n } = useTranslation();
+
+  i18n.on("languageChanged", (lng) => {
+    console.log("Detected language:", lng);
+  });
 
   const sunrise = cityWeather?.sys?.sunrise
     ? formatTime(cityWeather.sys.sunrise, cityWeather.timezone)
@@ -68,7 +75,9 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
             </div>
             <div>
               <p>Feels like: {Math.round(cityWeather.main.feels_like)}°</p>
-              <p>Humidity: {cityWeather.main.humidity}%</p>
+              <p>
+                {t("humidity")}: {cityWeather.main.humidity}%
+              </p>
             </div>
           </div>
         </div>
