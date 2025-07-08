@@ -14,6 +14,7 @@ i18n
     resources: {
       en: {
         translation: {
+          appTitle: "Horizons Express",
           favCities: "Favorites",
           weather: {
             humidity: "Humidity",
@@ -35,6 +36,7 @@ i18n
       },
       fr: {
         translation: {
+          appTitle: "Horizons Express",
           favCities: "Favoris",
           weather: {
             humidity: "Humidité",
@@ -56,6 +58,7 @@ i18n
       },
       ru: {
         translation: {
+          appTitle: "Экспресс Горизонты",
           favCities: "Избранное",
           weather: {
             humidity: "Влажность",
