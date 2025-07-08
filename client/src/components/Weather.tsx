@@ -5,9 +5,12 @@ import WeatherCard from "./WeatherCard";
 import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
 import { fetchWeatherForSelectedCity } from "../store/weather-slice";
+import { useTranslation } from "react-i18next";
 
 export default function Weather() {
   const [city, setCity] = useState<string>("");
+
+  const { t } = useTranslation();
 
   const { selectedCityWeather, isLoading, error } = useSelector(
     (state: RootState) => state.cities
@@ -31,7 +34,7 @@ export default function Weather() {
         <input
           type="text"
           value={city}
-          placeholder="Search for a city"
+          placeholder={t("actions.search")}
           onChange={handleChange}
           className="flex-1 border border-slate-400 px-2 py-1 rounded-full"
         />
