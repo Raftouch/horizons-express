@@ -16,6 +16,7 @@ i18n
         translation: {
           appTitle: "Horizons Express",
           favCities: "Favorites",
+          emptyList: "No cities in your list yet",
           weather: {
             humidity: "Humidity",
             sunrise: "Sunrise",
@@ -38,6 +39,7 @@ i18n
         translation: {
           appTitle: "Horizons Express",
           favCities: "Favoris",
+          emptyList: "Aucune ville dans votre liste pour le moment",
           weather: {
             humidity: "Humidité",
             sunrise: "Lever du soleil",
@@ -60,6 +62,7 @@ i18n
         translation: {
           appTitle: "Экспресс Горизонты",
           favCities: "Избранное",
+          emptyList: "В Вашем списке пока нет городов",
           weather: {
             humidity: "Влажность",
             sunrise: "Восход солнца",

@@ -39,7 +39,7 @@ export default function Favorite() {
           </div>
         </div>
       ) : (
-        <div className="text-slate-400">No cities in your list yet...</div>
+        <div className="text-slate-400">{t("emptyList")}</div>
       )}
     </div>
   );
