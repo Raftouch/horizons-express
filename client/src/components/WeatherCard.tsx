@@ -1,5 +1,5 @@
 import type { Weather } from "../models/weather";
-import { iconMapping } from "../utils/mapping";
+import { iconMapping } from "../utils/mappings/icon";
 import { formatTime } from "../utils/format";
 import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
