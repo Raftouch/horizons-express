@@ -13,7 +13,19 @@ i18n
     },
     resources: {
       en: {
-        translation: {},
+        translation: {
+          humidity: "Humidity",
+        },
+      },
+      fr: {
+        translation: {
+          humidity: "Humidité",
+        },
+      },
+      ru: {
+        translation: {
+          humidity: "Влажность",
+        },
       },
     },
   });
