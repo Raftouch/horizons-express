@@ -8,7 +8,8 @@ const getWeather = async (req, res) => {
     const data = await response.json();
     res.send(data);
   } catch (error) {
-    console.log(error);
+    console.error("Failed to fetch weather data", error.message);
+    res.status(500).json({ error: "Something went wrong" });
   }
 };
 

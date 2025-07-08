@@ -31,16 +31,16 @@ export default function Weather() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex gap-5 my-4 text-white pb-5 w-[364px]">
+      <div className="flex gap-5 my-4 text-white pb-5 w-[320px]">
         <input
           type="text"
           value={city}
           placeholder={t("actions.search")}
           onChange={handleChange}
-          className="flex-1 border border-slate-400 px-2 py-1 rounded-full"
+          className="outline-none focus:border-white flex-1 border border-white/50 px-4 py-1 rounded-full"
         />
         <button
-          className="border border-slate-400 cursor-pointer px-2 py-1 rounded-full hover:bg-slate-800"
+          className="border border-white/50 cursor-pointer px-2 py-1 rounded-full hover:border-white"
           onClick={handleSearch}
         >
           <FaSearch />
