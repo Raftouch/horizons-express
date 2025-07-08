@@ -70,13 +70,20 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
         <div className="space-y-1 text-sm">
           <div className="flex gap-5">
             <div>
-              <p>H:{Math.round(cityWeather.main.temp_max)}°</p>
-              <p>L:{Math.round(cityWeather.main.temp_min)}°</p>
+              <p>
+                {t("weather.max")}: {Math.round(cityWeather.main.temp_max)}°
+              </p>
+              <p>
+                {t("weather.min")}: {Math.round(cityWeather.main.temp_min)}°
+              </p>
             </div>
             <div>
-              <p>Feels like: {Math.round(cityWeather.main.feels_like)}°</p>
               <p>
-                {t("humidity")}: {cityWeather.main.humidity}%
+                {t("weather.feelsLike")}:{" "}
+                {Math.round(cityWeather.main.feels_like)}°
+              </p>
+              <p>
+                {t("weather.humidity")}: {cityWeather.main.humidity}%
               </p>
             </div>
           </div>
@@ -90,9 +97,15 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
           <i className="wi wi-strong-wind text-3xl text-sky-800"></i>
         </div>
         <div className="flex flex-col gap-2">
-          <p>Sunrise: {sunrise}</p>
-          <p>Sunset: {sunset}</p>
-          <p>Wind: {windSpeed} km/h</p>
+          <p>
+            {t("weather.sunrise")}: {sunrise}
+          </p>
+          <p>
+            {t("weather.sunset")}: {sunset}
+          </p>
+          <p>
+            {t("weather.wind")}: {windSpeed} {t("weather.kmH")}
+          </p>
         </div>
         <div className="flex items-center gap-5"></div>
       </div>
@@ -103,7 +116,7 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
             !cityWeather ? "opacity-50 cursos-not-allowed" : ""
           }`}
         >
-          Add to my list
+          {t("actions.addToList")}
         </button>
       ) : (
         <button
@@ -112,7 +125,7 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
             !cityWeather ? "opacity-50 cursos-not-allowed" : ""
           }`}
         >
-          Remove from list
+          {t("actions.removeFromList")}
         </button>
       )}
     </div>
