@@ -14,6 +14,7 @@ i18n
     resources: {
       en: {
         translation: {
+          favCities: "Favorites",
           weather: {
             humidity: "Humidity",
             sunrise: "Sunrise",
@@ -34,6 +35,7 @@ i18n
       },
       fr: {
         translation: {
+          favCities: "Favoris",
           weather: {
             humidity: "Humidité",
             sunrise: "Lever du soleil",
@@ -54,6 +56,7 @@ i18n
       },
       ru: {
         translation: {
+          favCities: "Избранное",
           weather: {
             humidity: "Влажность",
             sunrise: "Восход солнца",

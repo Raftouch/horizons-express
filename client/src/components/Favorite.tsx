@@ -6,10 +6,13 @@ import {
   clearSelectedCityWeather,
   fetchWeatherForFavorites,
 } from "../store/weather-slice";
+import { useTranslation } from "react-i18next";
 
 export default function Favorite() {
   const allWeather = useSelector((state: RootState) => state.cities.weather);
   const favorites = useSelector((state: RootState) => state.cities.favorites);
+
+  const { t } = useTranslation();
 
   const favorieCitiesWeather = allWeather.filter((city) =>
     favorites.includes(city.name)
@@ -29,7 +32,7 @@ export default function Favorite() {
 
   return (
     <div className="">
-      <h2 className="text-white text-center text-xl my-10">Favorite Cities</h2>
+      <h2 className="text-white text-center text-xl my-10">{t("favCities")}</h2>
       {favorieCitiesWeather.length > 0 ? (
         <div className="max-w-[400px] md:max-w-[768px] xl:max-w-[1280px] m-auto px-5">
           <div className="overflow-x-auto flex md:gap-18 gap-14 flex-nowrap pb-4 scroll-smooth">
