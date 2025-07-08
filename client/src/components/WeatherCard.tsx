@@ -5,20 +5,25 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
 import { addFavorite, removeFavorite } from "../store/weather-slice";
 import { useTranslation } from "react-i18next";
+import { weatherMainTranslations } from "../utils/mappings/description";
 
 interface CityWeatherProps {
   cityWeather: Weather;
 }
 
 export default function WeatherCard({ cityWeather }: CityWeatherProps) {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+
   const iconCode = cityWeather?.weather[0].icon;
   const iconClass = iconCode ? iconMapping[iconCode] : "";
 
-  const { t, i18n } = useTranslation();
+  const weatherDescription =
+    weatherMainTranslations[cityWeather?.weather[0].main];
 
-  i18n.on("languageChanged", (lng) => {
-    console.log("Detected language:", lng);
-  });
+  const descriptionTranslated =
+    weatherDescription?.[lang as "en-US" | "fr-FR" | "ru-RU"] ??
+    cityWeather?.weather[0].main;
 
   const sunrise = cityWeather?.sys?.sunrise
     ? formatTime(cityWeather.sys.sunrise, cityWeather.timezone)
@@ -60,9 +65,7 @@ export default function WeatherCard({ cityWeather }: CityWeatherProps) {
         <p className="text-3xl font-semibold mb-1">
           {Math.round(cityWeather.main.temp)}°
         </p>
-        <p className="italic text-gray-600">
-          {cityWeather.weather[0].description}
-        </p>
+        <p className="italic text-gray-600">{descriptionTranslated}</p>
       </div>
 
       <div className="flex gap-5 items-center justify-center border-t border-slate-400 w-full py-4">
