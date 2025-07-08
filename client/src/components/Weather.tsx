@@ -5,9 +5,12 @@ import WeatherCard from "./WeatherCard";
 import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
 import { fetchWeatherForSelectedCity } from "../store/weather-slice";
+import { useTranslation } from "react-i18next";
 
 export default function Weather() {
   const [city, setCity] = useState<string>("");
+
+  const { t } = useTranslation();
 
   const { selectedCityWeather, isLoading, error } = useSelector(
     (state: RootState) => state.cities
@@ -23,7 +26,8 @@ export default function Weather() {
     dispatch(fetchWeatherForSelectedCity(city));
   };
 
-  if (isLoading) return <div className="text-center">Loading...</div>;
+  if (isLoading)
+    return <div className="text-center text-white">{t("actions.loading")}</div>;
 
   return (
     <div className="flex flex-col items-center">
@@ -31,7 +35,7 @@ export default function Weather() {
         <input
           type="text"
           value={city}
-          placeholder="Search for a city"
+          placeholder={t("actions.search")}
           onChange={handleChange}
           className="outline-none focus:border-white flex-1 border border-white/50 px-4 py-1 rounded-full"
         />
