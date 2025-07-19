@@ -11,6 +11,7 @@ app.use(
   })
 );
 app.use("/", require("./routes/weather"));
+app.use("/weekly-forecast", require("./routes/weekly-forecast"));
 
 const start = async () => {
   try {
