@@ -3,7 +3,7 @@ const getWeeklyForecast = async (req, res) => {
   const city = req.query.city;
   const lat = "48.8566";
   const lon = "2.3522";
-  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=metric&appid=${apiKey}`;
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}&units=metric`;
 
   try {
     const response = await fetch(url);
