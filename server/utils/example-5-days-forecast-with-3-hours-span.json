@@ -1,0 +1,87 @@
+{
+  "cod": "200",
+  "message": 0,
+  "cnt": 40,
+  "list": [
+    {
+      "dt": 1752937200,
+      "main": {
+        "temp": 25.5,
+        "feels_like": 26.0,
+        "temp_min": 24.0,
+        "temp_max": 26.0,
+        "pressure": 1013,
+        "humidity": 60
+      },
+      "weather": [
+        {
+          "id": 801,
+          "main": "Clouds",
+          "description": "few clouds",
+          "icon": "02d"
+        }
+      ],
+      "clouds": {
+        "all": 20
+      },
+      "wind": {
+        "speed": 3.1,
+        "deg": 200
+      },
+      "visibility": 10000,
+      "pop": 0.04,
+      "sys": {
+        "pod": "d"
+      },
+      "dt_txt": "2025-07-19 15:00:00"
+    },
+    {
+      "dt": 1752948000,
+      "main": {
+        "temp": 24.2,
+        "feels_like": 24.8,
+        "temp_min": 23.5,
+        "temp_max": 25.0,
+        "pressure": 1011,
+        "humidity": 65
+      },
+      "weather": [
+        {
+          "id": 500,
+          "main": "Rain",
+          "description": "light rain",
+          "icon": "10d"
+        }
+      ],
+      "clouds": {
+        "all": 60
+      },
+      "wind": {
+        "speed": 4.2,
+        "deg": 180
+      },
+      "visibility": 10000,
+      "pop": 0.28,
+      "rain": {
+        "3h": 0.15
+      },
+      "sys": {
+        "pod": "d"
+      },
+      "dt_txt": "2025-07-19 18:00:00"
+    }
+  ],
+  "city": {
+    "id": 2988507,
+    "name": "Paris",
+    "coord": {
+      "lat": 48.8534,
+      "lon": 2.3488
+    },
+    "country": "FR",
+    "population": 2138551,
+    "timezone": 7200,
+    "sunrise": 1752898051,
+    "sunset": 1752954354
+  }
+}
