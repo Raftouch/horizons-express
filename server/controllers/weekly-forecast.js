@@ -8,9 +8,10 @@ const getWeeklyForecast = async (req, res) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log("DATA : ", data);
+    res.send(data);
   } catch (error) {
-    console.log(error);
+    console.error("Failed to fetch weather forecast", error.message);
+    res.status(500).json({ error: "Something went wrong" });
   }
 };
 
