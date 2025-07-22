@@ -7,10 +7,16 @@ import store from "./store/store.ts";
 import "./i18n.ts";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Forecast from "./components/Forecast.tsx";
+import RootLayout from "./RootLayout.tsx";
 
 const router = createBrowserRouter([
-  { path: "/", element: <App /> },
-  { path: "/forecast", element: <Forecast /> },
+  {
+    element: <RootLayout />,
+    children: [
+      { path: "/", element: <App /> },
+      { path: "/forecast", element: <Forecast /> },
+    ],
+  },
 ]);
 
 createRoot(document.getElementById("root")!).render(
