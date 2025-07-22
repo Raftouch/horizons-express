@@ -1,11 +1,7 @@
 import MainPage from "./pages/MainPage";
 
 function App() {
-  return (
-    <div className="font-mono">
-      <MainPage />
-    </div>
-  );
+  return <MainPage />;
 }
 
 export default App;
