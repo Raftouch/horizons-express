@@ -24,13 +24,16 @@ export default function Forecast() {
   }, [city]);
 
   return (
-    <div className="pt-20 text-white">
+    <div className="pt-20 text-white px-10  mb-10">
       <h3>Forecast</h3>
       <p>City: {city}</p>
       <p>Status {forecast?.cod}</p>
-      <ul>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
         {forecast?.list.map((fc) => (
-          <li key={fc.dt}>{fc.dt_txt}</li>
+          <li className="border bg-white text-slate-900 rounded-md" key={fc.dt}>
+            <p>{fc.dt_txt}</p>
+            <p>{Math.round(fc.main.temp)}°</p>
+          </li>
         ))}
       </ul>
     </div>
