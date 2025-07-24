@@ -1,4 +1,4 @@
-export const weatherMainTranslations: Record<
+export const weatherMainTranslationsMapping: Record<
   string,
   { "en-US": string; "fr-FR": string; "ru-RU": string }
 > = {
