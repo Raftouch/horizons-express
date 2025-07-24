@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { API_URL } from "../utils/api";
 import type { Forecast } from "../models/forecast";
+import Search from "./Search";
+import ForecastCard from "./ForecastCard";
 
 export default function Forecast() {
-  const [city, setCity] = useState<string>("Paris");
+  const [city, setCity] = useState<string>("");
   const [forecast, setForecast] = useState<Forecast | null>(null);
 
   const getForecast = async (city: string) => {
-    console.log("Fetching forecast for:", city);
+    // console.log("Fetching forecast for:", city);
     try {
       const res = await fetch(`${API_URL}/weekly-forecast?city=${city}`);
       //   const res = await fetch(`${API_URL}/weekly-forecast?city=Lille`);
@@ -19,22 +21,35 @@ export default function Forecast() {
     }
   };
 
-  useEffect(() => {
+  //   useEffect(() => {
+  //     getForecast(city);
+  //   }, [city]);
+
+  //   const dispatch = useDispatch<AddDispatch>();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCity(e.target.value);
+  };
+
+  const handleSearch = () => {
     getForecast(city);
-  }, [city]);
+  };
 
   return (
-    <div className="pt-20 text-white px-10  mb-10">
+    <div className="flex flex-col items-center pt-20 text-white px-10 mb-10">
+      <Search
+        city={city}
+        handleCityChange={handleChange}
+        handleCitySearch={handleSearch}
+      />
       <h3>Forecast</h3>
-      <p>City: {city}</p>
-      <p>Status {forecast?.cod}</p>
+      <p>City: {forecast?.city?.name}</p>
+      {/* <p>Status {forecast?.cod}</p> */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-        {forecast?.list.map((fc) => (
-          <li className="border bg-white text-slate-900 rounded-md" key={fc.dt}>
-            <p>{fc.dt_txt}</p>
-            <p>{Math.round(fc.main.temp)}°</p>
-          </li>
-        ))}
+        {Array.isArray(forecast?.list) &&
+          forecast?.list.map((fc) => (
+            <ForecastCard key={fc.dt} forecast={fc} />
+          ))}
       </ul>
     </div>
   );
