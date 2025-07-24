@@ -1,11 +1,11 @@
 export interface Forecast {
   cod: string;
-  message: string;
+  message: number;
   list: ForecastItem[];
   city: City;
 }
 
-interface ForecastItem {
+export interface ForecastItem {
   dt: number;
   main: {
     temp: number;
@@ -15,7 +15,7 @@ interface ForecastItem {
     pressure: number;
     humidity: number;
   };
-  weather: ForecastWeather;
+  weather: ForecastWeather[];
   dt_txt: string;
 }
 
