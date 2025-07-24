@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AddDispatch, RootState } from "../store/store";
 import { addFavorite, removeFavorite } from "../store/weather-slice";
 import { useTranslation } from "react-i18next";
-import { weatherMainTranslations } from "../utils/mappings/description";
+import { weatherMainTranslationsMapping } from "../utils/mappings/description";
 
 interface WeatherCardProps {
   cityWeather: Weather;
@@ -19,7 +19,7 @@ export default function WeatherCard({ cityWeather }: WeatherCardProps) {
   const iconClass = iconCode ? iconMapping[iconCode] : "";
 
   const weatherDescription =
-    weatherMainTranslations[cityWeather?.weather[0].main];
+    weatherMainTranslationsMapping[cityWeather?.weather[0].main];
 
   const descriptionTranslated =
     weatherDescription?.[lang as "en-US" | "fr-FR" | "ru-RU"] ??

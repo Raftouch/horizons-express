@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import type { ForecastItem } from "../models/forecast";
-import { weatherMainTranslations } from "../utils/mappings/description";
+import { weatherMainTranslationsMapping } from "../utils/mappings/description";
 import { iconMapping } from "../utils/mappings/icon";
 
 interface ForecastCardProps {
@@ -16,7 +16,8 @@ export default function ForecastCard({ forecast }: ForecastCardProps) {
 
   const lang = i18n.language;
 
-  const forecastDescription = weatherMainTranslations[forecast.weather[0].main];
+  const forecastDescription =
+    weatherMainTranslationsMapping[forecast.weather[0].main];
 
   const descriptionTranslated =
     forecastDescription?.[lang as "en-US" | "fr-FR" | "ru-RU"] ??
