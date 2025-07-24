@@ -7,11 +7,11 @@ import { addFavorite, removeFavorite } from "../store/weather-slice";
 import { useTranslation } from "react-i18next";
 import { weatherMainTranslations } from "../utils/mappings/description";
 
-interface CityWeatherProps {
+interface WeatherCardProps {
   cityWeather: Weather;
 }
 
-export default function WeatherCard({ cityWeather }: CityWeatherProps) {
+export default function WeatherCard({ cityWeather }: WeatherCardProps) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
