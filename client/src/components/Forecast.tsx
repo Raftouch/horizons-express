@@ -3,11 +3,14 @@ import { API_URL } from "../utils/api";
 import type { Forecast } from "../models/forecast";
 import Search from "./Search";
 import ForecastCard from "./ForecastCard";
+import { useTranslation } from "react-i18next";
 
 export default function Forecast() {
   const [city, setCity] = useState<string>("");
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const { t } = useTranslation();
 
   const getForecast = async (city: string) => {
     // console.log("Fetching forecast for:", city);
@@ -51,10 +54,15 @@ export default function Forecast() {
         handleCityChange={handleChange}
         handleCitySearch={handleSearch}
       />
-      <h3 className="mb-4">
-        5 days detailed forecast{" "}
-        {forecast?.city?.name ? <span>for {forecast?.city?.name}</span> : null}
-      </h3>
+      <div className="mb-4">
+        {t("forecast.fiveDayForecast")}{" "}
+        {forecast?.city?.name ? (
+          <span>
+            {t("forecast.for")}{" "}
+            <span className="text-rose-500">{forecast?.city?.name}</span>
+          </span>
+        ) : null}
+      </div>
 
       {error ? <p className="text-red-500">{error}</p> : null}
 

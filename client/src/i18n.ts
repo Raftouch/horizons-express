@@ -18,6 +18,7 @@ i18n
           favCities: "Favorites",
           emptyList: "No cities in your list yet",
           weather: {
+            current: "Current Weather",
             humidity: "Humidity",
             sunrise: "Sunrise",
             sunset: "Sunset",
@@ -26,6 +27,11 @@ i18n
             kmH: "km/h",
             min: "Min",
             max: "Max",
+          },
+          forecast: {
+            fc: "Forecast",
+            fiveDayForecast: "5-day detailed forecast",
+            for: "for",
           },
           actions: {
             addToList: "Add to my list",
@@ -41,6 +47,7 @@ i18n
           favCities: "Favoris",
           emptyList: "Aucune ville dans votre liste pour le moment",
           weather: {
+            current: "Météo actuelle",
             humidity: "Humidité",
             sunrise: "Lever du soleil",
             sunset: "Coucher du soleil",
@@ -49,6 +56,11 @@ i18n
             kmH: "km/h",
             min: "Min",
             max: "Max",
+          },
+          forecast: {
+            fc: "Prévisions",
+            fiveDayForecast: "Prévision détaillée sur 5 jours",
+            for: "pour",
           },
           actions: {
             addToList: "Ajouter à ma liste",
@@ -64,6 +76,7 @@ i18n
           favCities: "Избранное",
           emptyList: "В Вашем списке пока нет городов",
           weather: {
+            current: "Текущая погода",
             humidity: "Влажность",
             sunrise: "Восход солнца",
             sunset: "Закат солнца",
@@ -72,6 +85,11 @@ i18n
             kmH: "км/ч",
             min: "Мин.",
             max: "Макс.",
+          },
+          forecast: {
+            fc: "Прогноз",
+            fiveDayForecast: "Подробный прогноз на 5 дней",
+            for: "для",
           },
           actions: {
             addToList: "Добавить в список",

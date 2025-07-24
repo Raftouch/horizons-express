@@ -18,14 +18,14 @@ export default function NavBar() {
             location.pathname === "/" ? "border-b" : ""
           }`}
         >
-          <Link to="/">Current Weather</Link>
+          <Link to="/">{t("weather.current")}</Link>
         </li>
         <li
           className={`hover:text-rose-500 ${
             location.pathname === "/forecast" ? "border-b" : ""
           }`}
         >
-          <Link to="/forecast">Forecast</Link>
+          <Link to="/forecast">{t("forecast.fc")}</Link>
         </li>
       </ul>
     </div>
