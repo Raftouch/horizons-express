@@ -6,7 +6,7 @@ export default function NavBar() {
   const { t } = useTranslation();
 
   return (
-    <div className="fixed w-full flex justify-between text-white px-4 py-2">
+    <div className="fixed w-full flex justify-between text-white px-4 py-2 h-16 items-center bg-[linear-gradient(to_right,_#0f172a,_#4f46e5)]">
       <div className="flex gap-5">
         <h1 className="text-white mb-2">{t("appTitle")}</h1>
         <GiStripedSun className="text-white w-5 h-5" />
