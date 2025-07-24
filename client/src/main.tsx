@@ -6,15 +6,15 @@ import { Provider } from "react-redux";
 import store from "./store/store.ts";
 import "./i18n.ts";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Forecast from "./components/Forecast.tsx";
 import RootLayout from "./RootLayout.tsx";
+import ForecastPage from "./pages/ForecastPage.tsx";
 
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
       { path: "/", element: <App /> },
-      { path: "/forecast", element: <Forecast /> },
+      { path: "/forecast", element: <ForecastPage /> },
     ],
   },
 ]);
