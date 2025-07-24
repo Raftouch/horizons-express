@@ -7,16 +7,25 @@ import ForecastCard from "./ForecastCard";
 export default function Forecast() {
   const [city, setCity] = useState<string>("");
   const [forecast, setForecast] = useState<Forecast | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const getForecast = async (city: string) => {
     // console.log("Fetching forecast for:", city);
     try {
+      setError(null);
       const res = await fetch(`${API_URL}/weekly-forecast?city=${city}`);
-      //   const res = await fetch(`${API_URL}/weekly-forecast?city=Lille`);
       const data = await res.json();
+
+      if (data.cod === "404") {
+        setError(data.message);
+        setForecast(null);
+        return;
+      }
       console.log("DATA : ", data);
       setForecast(data);
     } catch (error) {
+      setError("Error fetching forecast");
+      setForecast(null);
       console.error(error);
     }
   };
@@ -36,7 +45,7 @@ export default function Forecast() {
   };
 
   return (
-    <div className="flex flex-col items-center pt-20 text-white px-10 mb-10">
+    <div className="flex flex-col items-center text-white px-10 mb-10">
       <Search
         city={city}
         handleCityChange={handleChange}
@@ -44,9 +53,11 @@ export default function Forecast() {
       />
       <h3 className="mb-4">
         5 days detailed forecast{" "}
-        {forecast && <span>for {forecast?.city?.name}</span>}
+        {forecast?.city?.name ? <span>for {forecast?.city?.name}</span> : null}
       </h3>
-      {/* <p>Status {forecast?.cod}</p> */}
+
+      {error ? <p className="text-red-500">{error}</p> : null}
+
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-8">
         {Array.isArray(forecast?.list) &&
           forecast?.list.map((fc) => (
