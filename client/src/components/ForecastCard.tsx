@@ -25,7 +25,7 @@ export default function ForecastCard({ forecast }: ForecastCardProps) {
 
   return (
     <li
-      className="flex flex-col items-center border bg-white text-slate-900 rounded-md min-w-[130px] py-2"
+      className="flex flex-col items-center bg-white text-slate-900 rounded-md min-w-[130px] py-2"
       key={forecast.dt}
     >
       <div className="flex gap-2 items-center">
