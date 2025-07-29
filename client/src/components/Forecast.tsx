@@ -14,7 +14,6 @@ export default function Forecast() {
   const { t } = useTranslation();
 
   const getForecast = async (city: string) => {
-    // console.log("Fetching forecast for:", city);
     try {
       setIsLoading(true);
       setError(null);
@@ -26,7 +25,6 @@ export default function Forecast() {
         setForecast(null);
         return;
       }
-      console.log("DATA : ", data);
       setForecast(data);
     } catch (error) {
       setError("Error fetching forecast");
@@ -36,12 +34,6 @@ export default function Forecast() {
       setIsLoading(false);
     }
   };
-
-  //   useEffect(() => {
-  //     getForecast(city);
-  //   }, [city]);
-
-  //   const dispatch = useDispatch<AddDispatch>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
