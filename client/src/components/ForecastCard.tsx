@@ -28,8 +28,12 @@ export default function ForecastCard({ forecast }: ForecastCardProps) {
       className="flex flex-col items-center border bg-white text-slate-900 rounded-md min-w-[130px] py-2"
       key={forecast.dt}
     >
-      <p>{date.toLocaleDateString()}</p>
-      <p>{forecast.dt_txt.slice(11, 16)}</p>
+      <div className="flex gap-2 items-center">
+        <p>{date.toLocaleDateString().slice(0, 5)}</p>
+        <p className="border px-1 rounded-md bg-gray-100">
+          {forecast.dt_txt.slice(11, 16)}
+        </p>
+      </div>
       <p className="italic text-gray-600">{descriptionTranslated}</p>
       <i className={`wi ${iconClass} text-4xl my-2`}></i>
       <p className="text-xl font-semibold mb-1">
