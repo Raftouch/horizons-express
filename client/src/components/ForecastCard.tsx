@@ -11,7 +11,7 @@ export default function ForecastCard({ forecast }: ForecastCardProps) {
   const iconCode = forecast.weather[0].icon;
   const iconClass = iconCode ? iconMapping[iconCode] : "";
 
-  const date = new Date(forecast.dt_txt);
+  const date = new Date(forecast.dt_txt.slice(0, 10));
   const { i18n } = useTranslation();
 
   const lang = i18n.language;
@@ -28,7 +28,7 @@ export default function ForecastCard({ forecast }: ForecastCardProps) {
       className="flex flex-col items-center border bg-white text-slate-900 rounded-md min-w-[130px] py-2"
       key={forecast.dt}
     >
-      <p>{date.toLocaleDateString().slice(0, 5)}</p>
+      <p>{date.toLocaleDateString()}</p>
       <p>{forecast.dt_txt.slice(11, 16)}</p>
       <p className="italic text-gray-600">{descriptionTranslated}</p>
       <i className={`wi ${iconClass} text-4xl my-2`}></i>
