@@ -9,12 +9,14 @@ export default function Forecast() {
   const [city, setCity] = useState<string>("");
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { t } = useTranslation();
 
   const getForecast = async (city: string) => {
     // console.log("Fetching forecast for:", city);
     try {
+      setIsLoading(true);
       setError(null);
       const res = await fetch(`${API_URL}/weekly-forecast?city=${city}`);
       const data = await res.json();
@@ -30,6 +32,8 @@ export default function Forecast() {
       setError("Error fetching forecast");
       setForecast(null);
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -46,6 +50,9 @@ export default function Forecast() {
   const handleSearch = () => {
     getForecast(city);
   };
+
+  if (isLoading)
+    return <div className="text-center text-white">{t("actions.loading")}</div>;
 
   return (
     <div className="flex flex-col items-center text-white px-10 mb-10">
