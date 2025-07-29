@@ -1,0 +1,27 @@
+{
+  "appTitle": "Horizons Express",
+  "favCities": "Favoris",
+  "emptyList": "Aucune ville dans votre liste pour le moment",
+  "weather": {
+    "current": "Météo actuelle",
+    "humidity": "Humidité",
+    "sunrise": "Lever du soleil",
+    "sunset": "Coucher du soleil",
+    "wind": "Vent",
+    "feelsLike": "Ressenti",
+    "kmH": "km/h",
+    "min": "Min",
+    "max": "Max"
+  },
+  "forecast": {
+    "fc": "Prévisions",
+    "fiveDayForecast": "Prévision détaillée sur 5 jours",
+    "for": "pour"
+  },
+  "actions": {
+    "addToList": "Ajouter à ma liste",
+    "removeFromList": "Retirer de ma liste",
+    "search": "Rechercher une ville",
+    "loading": "Recherche en cours"
+  }
+}
